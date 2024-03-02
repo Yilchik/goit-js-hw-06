@@ -1,156 +1,131 @@
-# goit-js-hw-05
+# goit-js-hw-06
 
-Задача 1. Імена користувачів
+Задача 1. Акаунт користувача
 
 Виконуй це завдання у файлі task-1.js
 
-Напиши стрілочну функцію getUserNames(users), яка прийматиме один параметр users
-— масив об’єктів користувачів. Функція має повертати масив імен усіх
-користувачів (властивість name) із масиву users.
+Перед звільненням розробник зламав вихідний код управління акаунтами
+користувачів нашого сервісу доставки їжі. Виконай рефакторинг методів об'єкта
+customer, розставивши відсутні this під час звернення до властивостей об'єкта.
 
-Візьми код нижче і встав після оголошення своєї функції для перевірки
-коректності її роботи. У консоль будуть виведені результати її викликів.
+Використай цей стартовий код і виконай рефакторинг. Після оголошення об'єкта ми
+додали виклики методів. У консоль будуть виведені результати їх роботи. Будь
+ласка, нічого там не змінюй.
 
-console.log( getUserNames([ { name: "Moore Hensley", email:
-"moorehensley@indexia.com", balance: 2811 }, { name: "Sharlene Bush", email:
-"sharlenebush@tubesys.com", balance: 3821 }, { name: "Ross Vazquez", email:
-"rossvazquez@xinware.com", balance: 3793 }, { name: "Elma Head", email:
-"elmahead@omatom.com", balance: 2278 }, { name: "Carey Barr", email:
-"careybarr@nurali.com", balance: 3951 }, { name: "Blackburn Dotson", email:
-"blackburndotson@furnigeer.com", balance: 1498 }, { name: "Sheree Anthony",
-email: "shereeanthony@kog.com", balance: 2764 }, ]) ); // ["Moore Hensley",
-"Sharlene Bush", "Ross Vazquez", "Elma Head", "Carey Barr", "Blackburn Dotson",
-"Sheree Anthony"]
+const customer = { username: "Mango", balance: 24000, discount: 0.1, orders:
+["Burger", "Pizza", "Salad"], // Change code below this line getBalance() {
+return balance; }, getDiscount() { return discount; }, setDiscount(value) {
+discount = value; }, getOrders() { return orders; }, addOrder(cost, order) {
+balance -= cost - cost \* discount; orders.push(order); }, // Change code above
+this line };
+
+customer.setDiscount(0.15); console.log(customer.getDiscount()); // 0.15
+customer.addOrder(5000, "Steak"); console.log(customer.getBalance()); // 19750
+console.log(customer.getOrders()); // ["Burger", "Pizza", "Salad", "Steak"]
 
 Залиш цей код для перевірки ментором.
 
 На що буде звертати увагу ментор при перевірці:
 
-Оголошена змінна getUserNames Змінній getUserNames присвоєна стрілочна функція з
-параметром (users). Для перебирання параметра users використовується метод map()
-Виклик функції із зазначеним масивом користувачів повертає масив ["Moore
-Hensley", "Sharlene Bush", "Ross Vazquez", "Elma Head", "Carey Barr", "Blackburn
-Dotson", "Sheree Anthony"] Виклик функції з випадковими, але валідними
-аргументами повертає правильне значення
+Оголошена змінна customer Значення змінної customer — це об'єкт із властивостями
+та методами Виклик customer.getDiscount() повертає поточне значення властивості
+discount Виклик customer.setDiscount(0.15) оновлює значення властивості discount
+Виклик customer.getBalance() повертає поточне значення властивості balance.
+Виклик customer.getOrders() повертає поточне значення властивості orders Виклик
+customer.addOrder(5000, "Steak") додає "Steak" у масив значень властивості
+orders та оновлює баланс Метод getBalance об'єкта customer використовує this
+Метод getDiscount об'єкта customer використовує this Метод setDiscount об'єкта
+customer використовує this Метод getOrders об'єкта customer використовує this
+Метод addOrder об'єкта customer використовує this
 
-Задача 2. Користувачі з другом
+Задача 2. Склад
 
 Виконуй це завдання у файлі task-2.js
 
-Напиши стрілочну функцію getUsersWithFriend(users, friendName) , яка прийматиме
-два параметра:
+Створи клас Storage, який створюватиме об'єкти для управління складом товарів.
+Клас очікує лише один аргумент — початковий масив товарів, який записується до
+створеного об'єкта в приватну властивість items.
 
-перший параметр users — масив об’єктів користувачів другий параметр friendName —
-ім’я друга для пошуку. Функція має повертати масив усіх користувачів із масиву
-users, у яких є друг з іменем friendName. Друзі кожного користувача зберігаються
-у властивості friends. Якщо користувачів, у яких є такий других немає, то
-функція має повернути порожній масив.
+Оголоси наступні методи класу:
 
-Поради:
+getItems() — повертає масив поточних товарів у приватній властивості items.
+addItem(newItem) — приймає новий товар newItem і додає його до масиву товарів у
+приватну властивість items об'єкта. removeItem(itemToRemove) — приймає рядок з
+назвою товару itemToRemove і видаляє його з масиву товарів у приватній
+властивості items об'єкта.
 
-Метод filter() можна використовувати для створення нового масиву з елементами,
-які задовольняють певну умову. Використовуй метод includes() для перевірки, чи
-масив friends містить friendName. Візьми код нижче і встав після оголошення
-своєї функції для перевірки коректності її роботи. У консоль будуть виведені
-результати її роботи.
+Візьми код нижче з ініціалізацією екземпляра й викликами методів і встав його
+після оголошення класу для перевірки коректності роботи. У консоль будуть
+виведені результати їх роботи. Будь ласка, нічого там не змінюй.
 
-const allUsers = [ { name: "Moore Hensley", friends: ["Sharron Pace"] }, { name:
-"Sharlene Bush", friends: ["Briana Decker", "Sharron Pace"] }, { name: "Ross
-Vazquez", friends: ["Marilyn Mcintosh", "Padilla Garrison", "Naomi Buckner"] },
-{ name: "Elma Head", friends: ["Goldie Gentry", "Aisha Tran"] }, { name: "Carey
-Barr", friends: ["Jordan Sampson", "Eddie Strong"] }, { name: "Blackburn
-Dotson", friends: ["Jacklyn Lucas", "Linda Chapman"] }, { name: "Sheree
-Anthony", friends: ["Goldie Gentry", "Briana Decker"] } ];
-
-console.log(getUsersWithFriend(allUsers, "Briana Decker")); // [ // { // name:
-"Sharlene Bush", // friends: ["Briana Decker", "Sharron Pace"] // }, // { //
-name: "Sheree Anthony", // friends: ["Goldie Gentry", "Briana Decker"] // } // ]
-
-console.log(getUsersWithFriend(allUsers, "Goldie Gentry")); // [ // { // name:
-"Elma Head", // friends: ["Goldie Gentry", "Aisha Tran"] // }, // { // name:
-"Sheree Anthony", // friends: ["Goldie Gentry", "Briana Decker"] // } // ]
-
-console.log(getUsersWithFriend(allUsers, "Adrian Cross" )); // []
+const storage = new Storage(["Nanitoids", "Prolonger", "Antigravitator"]);
+console.log(storage.getItems()); // ["Nanitoids", "Prolonger", "Antigravitator"]
+storage.addItem("Droid"); console.log(storage.getItems()); // ["Nanitoids",
+"Prolonger", "Antigravitator", "Droid"] storage.removeItem("Prolonger");
+console.log(storage.getItems()); // ["Nanitoids", "Antigravitator", "Droid"]
 
 Залиш цей код для перевірки ментором.
 
 На що буде звертати увагу ментор при перевірці:
 
-Оголошена змінна getUsersWithFriend Змінній getUsersWithFriend присвоєна
-стрілочна функція з параметрами (users, friendName) Для перебирання параметра
-users використовується метод filter() Якщо значення параметра friendName — це
-рядок "Briana Decker", функція повертає масив об'єктів користувачів з іменами
-Sharlene Bush і Sheree Anthony Якщо значення параметра friendName — це рядок
-"Goldie Gentry", функція повертає масив об'єктів користувачів з іменами Elma
-Head і Sheree Anthony Якщо значення параметра friendName — це рядок "Adrian
-Cross", функція повертає порожній масив Виклик функції з випадковими, але
-валідними аргументами повертає правильне значення
+Оголошений клас Storage У класі Storage оголошений метод getItems У класі
+Storage оголошений метод addItem У класі Storage оголошений метод removeItem
+Властивість items у класі Storage оголошена приватною Метод getItems повертає
+значення приватної властивості items екземпляра класу, який його викликає Метод
+addItem змінює значення приватної властивості items екземпляра класу, який його
+викликає Метод removeItem змінює значення приватної властивості items екземпляра
+класу, який його викликає У результаті виклику new Storage(["Nanitoids",
+"Prolonger", "Antigravitator"]) значення змінної storage — це об'єкт У об’єкта
+storage немає публічної властивості items Перший виклик storage.getItems()
+одразу після ініціалізації екземпляра повертає масив ["Nanitoids", "Prolonger",
+"Antigravitator"] Другий виклик storage.getItems() після виклику
+storage.addItem("Droid") повертає масив ["Nanitoids", "Prolonger",
+"Antigravitator", "Droid"] Третій виклик storage.getItems() після виклику
+storage.removeItem("Prolonger") повертає масив ["Nanitoids", "Antigravitator",
+"Droid"]
 
-Задача 3. Сортування за кількістю друзів
+Задача 3. Конструктор рядків
 
 Виконуй це завдання у файлі task-3.js
 
-Напиши стрілочну функцію sortByDescendingFriendCount(users) , яка прийматиме
-один параметр users — масив об’єктів користувачів.
+Напиши клас StringBuilder, який приймає один параметр initialValue — довільний
+рядок, який записується у приватну властивість value об'єкта, що створюється.
 
-Функція має повертати масив усіх користувачів, відсортованих за спаданням
-кількостій їх друзів (властивість friends).
+Оголоси наступні методи класу:
 
-Візьми код нижче і встав після оголошення своєї функції для перевірки
-коректності її роботи. У консоль будуть виведені результати її роботи.
+getValue() — повертає поточне значення приватної властивості value. padEnd(str)
+— отримує параметр str (рядок) і додає його в кінець значення приватної
+властивості value об'єкта, який викликає цей метод. padStart(str) — отримує
+параметр str (рядок) і додає його на початок значення приватної властивості
+value об'єкта, який викликає цей метод. padBoth(str) — отримує параметр str
+(рядок) і додає його на початок і в кінець значення приватної властивості value
+об'єкта, який викликає цей метод. Візьми код нижче з ініціалізацією екземпляра й
+викликами методів і встав його після оголошення класу для перевірки коректності
+роботи. У консоль будуть виведені результати їх роботи. Будь ласка, нічого там
+не змінюй.
 
-console.log( sortByDescendingFriendCount([ { name: "Moore Hensley", friends:
-["Sharron Pace"], gender: "male" }, { name: "Sharlene Bush", friends: ["Briana
-Decker", "Sharron Pace"], gender: "female" }, { name: "Ross Vazquez", friends:
-["Marilyn Mcintosh", "Padilla Garrison", "Naomi Buckner"], gender: "male" }, {
-name: "Elma Head", friends: ["Goldie Gentry", "Aisha Tran"], gender: "female" },
-{ name: "Carey Barr", friends: ["Jordan Sampson", "Eddie Strong"], gender:
-"male" }, { name: "Blackburn Dotson", friends: ["Jacklyn Lucas", "Linda
-Chapman"], gender: "male" }, { name: "Sheree Anthony", friends: ["Goldie
-Gentry", "Briana Decker"], gender: "female" } ]) ); // [ // { // name: "Ross
-Vazquez", // friends: ["Marilyn Mcintosh", "Padilla Garrison", "Naomi Buckner"],
-// gender: "male" // }, // { // name: "Sharlene Bush", // friends: ["Briana
-Decker", "Sharron Pace"], // gender: "female" // }, // { // name: "Elma Head",
-// friends: ["Goldie Gentry", "Aisha Tran"], // gender: "female" // }, // { //
-name: "Carey Barr", // friends: ["Jordan Sampson", "Eddie Strong"], // gender:
-"male" // }, // { // name: "Blackburn Dotson", // friends: ["Jacklyn Lucas",
-"Linda Chapman"], // gender: "male" // }, // { // name: "Sheree Anthony", //
-friends: ["Goldie Gentry", "Briana Decker"], // gender: "female" // }, // { //
-name: "Moore Hensley", // friends: ["Sharron Pace"], // gender: "male" // } // ]
+const builder = new StringBuilder("."); console.log(builder.getValue()); // "."
+builder.padStart("^"); console.log(builder.getValue()); // "^."
+builder.padEnd("^"); console.log(builder.getValue()); // "^.^"
+builder.padBoth("="); console.log(builder.getValue()); // "=^.^="
 
 Залиш цей код для перевірки ментором.
 
 На що буде звертати увагу ментор при перевірці:
 
-Оголошена змінна sortByDescendingFriendCount Змінній sortByDescendingFriendCount
-присвоєна стрілочна функція з параметром (users) Для перебирання параметра users
-використаний метод toSorted() Виклик функції із зазначеним масивом users
-повертає новий масив користувачів, відсортований за спаданням кількості їхніх
-друзів Виклик функції з випадковими, але валідними аргументами повертає
-правильне значення
-
-Задача 4. Загальний баланс
-
-Напиши стрілочну функцію getTotalBalanceByGender(users, gender), яка прийматиме
-два параметра:
-
-перший параметр users — масив об’єктів користувачів, другий параметр gender —
-рядок, що зберігає стать. Функція має використовувати ланцюжок виклику методів
-та повертати загальний баланс користувачів (властивість balance), стать яких
-(властивість gender) збігається зі значенням параметра gender.
-
-Візьми код нижче і встав після оголошення своєї функції для перевірки
-коректності її роботи. У консоль будуть виведені результати її роботи.
-
-const clients = [ { name: "Moore Hensley", gender: "male", balance: 2811 }, {
-name: "Sharlene Bush", gender: "female", balance: 3821 }, { name: "Ross
-Vazquez", gender: "male", balance: 3793 }, { name: "Elma Head", gender:
-"female", balance: 2278 }, { name: "Carey Barr", gender: "male", balance: 3951
-}, { name: "Blackburn Dotson", gender: "male", balance: 1498 }, { name: "Sheree
-Anthony", gender: "female", balance: 2764 } ];
-
-console.log(getTotalBalanceByGender(clients, "male")); // 12053
-
-console.log(getTotalBalanceByGender(clients, "female")); // 8863
-
-Залиш цей код для перевірки ментором.
+Оголошений клас StringBuilder Властивість value у класі StringBuilder оголошена
+приватною У класі StringBuilder оголошений метод getValue Метод getValue
+повертає значення приватної властивості value екземпляра класу, який його
+викликає У класі StringBuilder оголошений метод padEnd Метод padEnd змінює
+значення приватної властивості value екземпляра класу, який його викликає У
+класі StringBuilder оголошений метод padStart Метод padStart змінює приватну
+властивість value екземпляра класу, який його викликає У класі StringBuilder
+оголошений метод padBoth Метод padBoth змінює значення приватної властивості
+value екземпляра класу, який його викликає У результаті виклику new
+StringBuilder(".") значення приватної змінної builder — це об'єкт Об'єкт builder
+не містить публічну властивість value Перший виклик builder.getValue() одразу
+після ініціалізації екземпляра повертає рядок . Другий виклик builder.getValue()
+після виклику builder.padStart("^") повертає рядок ^. Третій виклик
+builder.getValue() після виклику builder.padEnd("^") повертає рядок ^.^
+Четвертий виклик builder.getValue() після виклику builder.padBoth("=") повертає
+рядок =^.^=

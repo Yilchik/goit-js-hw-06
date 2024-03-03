@@ -1,7 +1,7 @@
 class Storage {
   #items;
 
-  constructor({ items }) {
+  constructor(items) {
     this.#items = items;
   }
 
@@ -15,7 +15,8 @@ class Storage {
 
   removeItem(itemToRemove) {
     if (this.#items.includes(itemToRemove)) {
-      this.#items.splice(itemToRemove);
+      const ind = this.#items.indexOf(itemToRemove);
+      this.#items.splice(ind, 1);
     }
   }
 }
